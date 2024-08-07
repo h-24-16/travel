@@ -64,6 +64,11 @@ public class SecurityConfiguration {
                                         .requestMatchers(PUT, "/travels/**").hasRole(Permission.ADMIN.name())
                                         .requestMatchers(DELETE, "/travels/**").hasRole(Permission.ADMIN.name())
 
+                                        .requestMatchers(GET, "/steps/**").permitAll()
+                                        .requestMatchers(POST, "/steps/**").hasRole(Permission.ADMIN.name())
+                                        .requestMatchers(PUT, "/steps/**").hasRole(Permission.ADMIN.name())
+                                        .requestMatchers(DELETE, "/steps/**").hasRole(Permission.ADMIN.name())
+
                                         .anyRequest().authenticated()
                 )
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
