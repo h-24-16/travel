@@ -175,6 +175,27 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Travel"
+  /travel/search/findTravelByDescription:
+    get:
+      tags:
+        - travel
+      operationId: getTravelByDescription
+      summary: Rechercher des voyages par description
+      parameters:
+        - name: description
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: La liste des voyages correspondants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Travel"
   /booking:
     put:
       tags:
@@ -233,7 +254,7 @@ paths:
             application/json:
               schema:
                 type: number
-  /booking/validation/{reservation_id}:
+  /booking/validation/{bookingId}:
     put:
       tags:
         - booking

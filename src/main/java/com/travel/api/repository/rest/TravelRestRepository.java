@@ -10,5 +10,6 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "travel", path = "travel")
 public interface TravelRestRepository extends JpaRepository<Travel, Long> {
     List<Travel> findTravelByName(@Param("name") String name);
+    List<Travel> findTravelByDestination(@Param("destination") String destination);
     List<Travel> findTravelById(@Param("travelId") Long travelId);
 }
