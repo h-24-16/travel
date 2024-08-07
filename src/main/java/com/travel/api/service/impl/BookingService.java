@@ -14,6 +14,10 @@ public class BookingService {
         return bookingRepository.findById(id).get().getTotalCost();
     }
 
+    public Booking getBookingById(Long id) {
+        return bookingRepository.getById(id);
+    }
+
     public Booking crupdateBooking(Booking booking) {
         return bookingRepository.save(booking);
     }

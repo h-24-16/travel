@@ -1,4 +1,4 @@
-package com.travel.api.controller;
+package com.travel.api.endpoint.rest.controller;
 
 import com.travel.api.model.FileDB;
 import com.travel.api.service.impl.FileService;

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-@RepositoryRestResource(collectionResourceRel = "client", path = "client")
 public interface ClientRepository extends JpaRepository<Client, Long> {
     Client findClientById(Long id);
     Optional<Client> findClientByEmail(String email);

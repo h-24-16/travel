@@ -1,5 +1,7 @@
-package com.travel.api.controller;
+package com.travel.api.endpoint.rest.controller;
 
+import com.travel.api.endpoint.rest.dto.BookingDto;
+import com.travel.api.endpoint.rest.mapper.BookingMapper;
 import com.travel.api.model.Booking;
 import com.travel.api.service.impl.BookingService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "booking")
 public class BookingController {
     private BookingService bookingService;
+    private BookingMapper bookingMapper;
 
     @GetMapping("/total/{bookingId}")
     public ResponseEntity<Double> totalCost(@PathVariable Long bookingId) {
@@ -20,12 +23,12 @@ public class BookingController {
     }
 
     @PutMapping
-    public ResponseEntity<Booking> crupdateBooking(@RequestBody Booking booking) {
-        return ResponseEntity.ok(bookingService.crupdateBooking(booking));
+    public ResponseEntity<BookingDto> crupdateBooking(@RequestBody BookingDto booking) {
+        return ResponseEntity.ok(bookingMapper.toDto(bookingService.crupdateBooking(bookingMapper.toEntity(booking))));
     }
 
     @PutMapping("/validation/{clientId}")
-    public ResponseEntity<Booking> validateBooking(@PathVariable Long clientId) {
-        return ResponseEntity.ok(bookingService.validateBooking(clientId));
+    public ResponseEntity<BookingDto> validateBooking(@PathVariable Long clientId) {
+        return ResponseEntity.ok(bookingMapper.toDto(bookingService.validateBooking(clientId)));
     }
 }
