@@ -50,6 +50,7 @@ public class SecurityConfiguration {
                                 authorize
                                         .requestMatchers(POST, "/auth/**").permitAll()
 
+                                        .requestMatchers(GET, "/files/**").permitAll()
                                         .requestMatchers(POST, "/files").permitAll()
 
                                         .requestMatchers(GET, "/client/**").permitAll()
