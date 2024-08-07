@@ -1,0 +1,273 @@
+openapi: 3.0.3
+info:
+  title: Travel API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /travel:
+    put:
+      tags:
+        - travel
+      operationId: crupdateTravel
+      summary: met à jour un voyage si l'id est donné, sinon on le crée
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: "#/components/schemas/Travel"
+      responses:
+        '200':
+          description: le voyage crée ou mis à jour
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Travel"
+    get:
+      tags:
+        - travel
+      operationId: getAllTravel
+      summary: obtenir la liste paginer de tous les voyages
+      responses:
+        '200':
+          description: la liste paginer de tous les voyages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Travel"
+  /travel/{travel_id}:
+    get:
+      tags:
+        - travel
+      operationId: getTravelById
+      summary: obtenir un voyage demandé
+      parameters:
+        - $ref: "#/components/parameters/travel_id"
+      responses:
+        '200':
+          description: le voyage demandé
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Travel"
+  /reservation:
+    put:
+      tags:
+        - booking
+      operationId: crupdateBooking
+      summary: met à jour une réservation si l'id est donné, sinon on le crée
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: "#/components/schemas/Booking"
+      responses:
+        '200':
+          description: la réservation crée ou mis à jour
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Booking"
+  /reservation/{client_id}:
+    get:
+      tags:
+        - booking
+      operationId: getBookingByClientId
+      summary: obtenir les réservations d'un client
+      parameters:
+        - $ref: "#/components/parameters/client_id"
+      responses:
+        '200':
+          description: la liste des réservation du client
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Booking"
+  /reservation/validation/{reservation_id}:
+    put:
+      tags:
+        - booking
+      operationId: validateBooking
+      summary: valider une réservation
+      parameters:
+        - $ref: "#/components/parameters/reservation_id"
+      responses:
+        '200':
+          description: la réservation mise à jour
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Booking"
+  /auth/login:
+    post:
+      tags:
+        - auth
+      operationId: authentication
+      summary: se connecter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: "#/components/schemas/Client"
+      responses:
+        '200':
+          description: token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+  /auth/register:
+    post:
+      tags:
+        - auth
+      operationId: register
+      summary: créer un compte
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: "#/components/schemas/Client"
+      responses:
+        '200':
+          description: token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+  /step:
+    put:
+      tags:
+        - step
+      operationId: crupdateStep
+      summary: met à jour une étape du voyage si l'id est donné, sinon on le crée
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: "#/components/schemas/Step"
+      responses:
+        '200':
+          description: l'étape crée ou mise à jour
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Step"
+components:
+  parameters:
+    travel_id:
+      name: travel_id
+      required: true
+      in: path
+      schema:
+        type: integer
+    client_id:
+      name: client_id
+      required: true
+      in: path
+      schema:
+        type: integer
+    reservation_id:
+      name: reservation_id
+      required: true
+      in: path
+      schema:
+        type: integer
+  schemas:
+    Travel:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        departure:
+          type: string
+        destination:
+          type: string
+        duration:
+          type: integer
+        pricePerClient:
+          type: number
+    Booking:
+      type: object
+      properties:
+        id:
+          type: integer
+        isValidate:
+          type: boolean
+        travelId:
+          type: integer
+        clientId:
+          type: integer
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        photo:
+          type: string
+    Step:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        travel_id:
+          type: integer
+    token:
+      type: object
+      properties:
+        token:
+          type: string
