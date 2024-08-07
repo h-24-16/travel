@@ -69,6 +69,17 @@ public class SecurityConfiguration {
                                         .requestMatchers(PUT, "/steps/**").hasRole(Permission.ADMIN.name())
                                         .requestMatchers(DELETE, "/steps/**").hasRole(Permission.ADMIN.name())
 
+                                        .requestMatchers(PUT, "/step/**").hasRole(Permission.ADMIN.name())
+
+                                        .requestMatchers(GET, "/bookings/**").permitAll()
+                                        .requestMatchers(POST, "/bookings/**").hasRole(Permission.ADMIN.name())
+                                        .requestMatchers(PUT, "/bookings/**").hasRole(Permission.ADMIN.name())
+                                        .requestMatchers(DELETE, "/bookings/**").hasRole(Permission.ADMIN.name())
+
+                                        .requestMatchers(GET, "/booking/**").permitAll()
+                                        .requestMatchers(PUT, "/booking/**").permitAll()
+                                        .requestMatchers(PUT, "/booking/validation/**").hasRole(Permission.ADMIN.name())
+
                                         .anyRequest().authenticated()
                 )
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
