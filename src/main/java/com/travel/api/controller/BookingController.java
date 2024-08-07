@@ -2,6 +2,7 @@ package com.travel.api.controller;
 
 import com.travel.api.model.Booking;
 import com.travel.api.service.impl.BookingService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/booking")
+@Tag(name = "booking")
 public class BookingController {
     private BookingService bookingService;
 

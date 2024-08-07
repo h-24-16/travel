@@ -2,6 +2,7 @@ package com.travel.api.controller;
 
 import com.travel.api.model.FileDB;
 import com.travel.api.service.impl.FileService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.io.IOException;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/files")
+@Tag(name = "file")
 public class FileController {
 
     private FileService fileService;

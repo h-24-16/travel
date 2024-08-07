@@ -4,6 +4,7 @@ import com.travel.api.dto.AuthenticationDto;
 import com.travel.api.model.auth.Client;
 import com.travel.api.security.JwtService;
 import com.travel.api.service.impl.CustomUserDetailsService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +21,7 @@ import java.util.Map;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "authentication")
 public class AuthenticationController {
 
     private AuthenticationManager authenticationManager;
