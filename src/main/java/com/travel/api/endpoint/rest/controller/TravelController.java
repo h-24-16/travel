@@ -1,6 +1,7 @@
 package com.travel.api.endpoint.rest.controller;
 
-import com.travel.api.model.Travel;
+import com.travel.api.endpoint.rest.dto.TravelDto;
+import com.travel.api.endpoint.rest.mapper.TravelMapper;
 import com.travel.api.service.impl.TravelService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "travel")
 public class TravelController {
     private TravelService travelService;
+    private TravelMapper travelMapper;
 
     @PutMapping
-    public ResponseEntity<Travel> crupdateTravel(@RequestBody Travel travel) {
-        return ResponseEntity.ok(travelService.crupdateTravel(travel));
+    public ResponseEntity<TravelDto> crupdateTravel(@RequestBody TravelDto travel) {
+        return ResponseEntity.ok(travelMapper.toDto(travelService.crupdateTravel(travelMapper.toEntity(travel))));
     }
 }

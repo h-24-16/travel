@@ -44,6 +44,10 @@ public class FileService {
         return fileRepository.findById(id).orElseThrow(() -> new RuntimeException("File not found"));
     }
 
+    public FileDB getFileByPath(String path) {
+        return fileRepository.findFileDBByPath(path).get();
+    }
+
     public byte[] loadFileAsResource(Long id) throws IOException {
         FileDB image = getFile(id);
         Path path = Paths.get(image.getPath());
