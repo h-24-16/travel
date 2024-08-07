@@ -48,6 +48,9 @@ public class SecurityConfiguration {
                         authorize ->
                                 authorize
                                         .requestMatchers(POST, "/auth").permitAll()
+
+                                        .requestMatchers(POST, "/files").permitAll()
+
                                         .anyRequest().authenticated()
                 )
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
