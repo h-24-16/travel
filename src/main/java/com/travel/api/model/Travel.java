@@ -16,6 +16,7 @@ public class Travel {
     private String name;
     private String departure;
     private String destination;
+    private String description;
     private Integer duration;
     private LocalDate departureDate;
     private Double price;
