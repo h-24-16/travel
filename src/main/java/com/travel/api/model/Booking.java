@@ -12,10 +12,21 @@ public class Booking {
     private Long id;
 
     private Boolean isValidate;
+    private Integer clientNumber;
 
     @ManyToOne
     private Travel travel;
 
     @ManyToOne
     private Client client;
+
+    @Transient
+    private Double totalCost;
+
+    public Double getTotalCost() {
+        if (travel != null && clientNumber != null) {
+            return clientNumber * travel.getPrice();
+        }
+        return 0.0;
+    }
 }
