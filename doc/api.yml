@@ -5,131 +5,34 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
-  /travels:
-    put:
+  /files:
+    post:
       tags:
-        - travel
-      operationId: crupdateTravel
-      summary: met à jour un voyage si l'id est donné, sinon on le crée
+        - files
+      operationId: uploadFile
+      summary: Télécharger un fichier
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
-                data:
-                  $ref: "#/components/schemas/Travel"
+                file:
+                  type: string
+                  format: binary
       responses:
-        '200':
-          description: le voyage crée ou mis à jour
+        '201':
+          description: Fichier téléchargé avec succès
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    $ref: "#/components/schemas/Travel"
-  /travel:
-    get:
-      tags:
-        - travel
-      operationId: getAllTravel
-      summary: obtenir la liste paginer de tous les voyages
-      responses:
-        '200':
-          description: la liste paginer de tous les voyages
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Travel"
-  /travel/{travel_id}:
-    get:
-      tags:
-        - travel
-      operationId: getTravelById
-      summary: obtenir un voyage demandé
-      parameters:
-        - $ref: "#/components/parameters/travel_id"
-      responses:
-        '200':
-          description: le voyage demandé
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Travel"
-  /booking:
-    put:
-      tags:
-        - booking
-      operationId: crupdateBooking
-      summary: met à jour une réservation si l'id est donné, sinon on le crée
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                data:
-                  $ref: "#/components/schemas/Booking"
-      responses:
-        '200':
-          description: la réservation crée ou mis à jour
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    $ref: "#/components/schemas/Booking"
-  /booking/{client_id}:
-    get:
-      tags:
-        - booking
-      operationId: getBookingByClientId
-      summary: obtenir les réservations d'un client
-      parameters:
-        - $ref: "#/components/parameters/client_id"
-      responses:
-        '200':
-          description: la liste des réservation du client
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Booking"
-  /booking/validation/{reservation_id}:
-    put:
-      tags:
-        - booking
-      operationId: validateBooking
-      summary: valider une réservation
-      parameters:
-        - $ref: "#/components/parameters/reservation_id"
-      responses:
-        '200':
-          description: la réservation mise à jour
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    $ref: "#/components/schemas/Booking"
+                $ref: "#/components/schemas/FileDB"
   /auth/login:
     post:
       tags:
         - auth
       operationId: authentication
-      summary: se connecter
+      summary: Se connecter
       requestBody:
         content:
           application/json:
@@ -137,10 +40,10 @@ paths:
               type: object
               properties:
                 data:
-                  $ref: "#/components/schemas/Client"
+                  $ref: "#/components/schemas/Login"
       responses:
         '200':
-          description: token
+          description: Token
           content:
             application/json:
               schema:
@@ -153,7 +56,7 @@ paths:
       tags:
         - auth
       operationId: register
-      summary: créer un compte
+      summary: Créer un compte
       requestBody:
         content:
           application/json:
@@ -164,7 +67,7 @@ paths:
                   $ref: "#/components/schemas/Client"
       responses:
         '200':
-          description: token
+          description: Token
           content:
             application/json:
               schema:
@@ -177,7 +80,7 @@ paths:
       tags:
         - step
       operationId: crupdateStep
-      summary: met à jour une étape du voyage si l'id est donné, sinon on le crée
+      summary: Met à jour une étape du voyage si l'id est donné, sinon on le crée
       requestBody:
         content:
           application/json:
@@ -188,7 +91,7 @@ paths:
                   $ref: "#/components/schemas/Step"
       responses:
         '200':
-          description: l'étape crée ou mise à jour
+          description: L'étape créée ou mise à jour
           content:
             application/json:
               schema:
@@ -196,17 +99,21 @@ paths:
                 properties:
                   data:
                     $ref: "#/components/schemas/Step"
-  /steps/search/findStepByTravelId?travelId={travel_id}:
+  /steps/search/findStepByTravelId:
     get:
       tags:
         - step
       operationId: getStepsByTravelId
-      summary: obtenir une liste des étapes du voyage
+      summary: Obtenir une liste des étapes du voyage
       parameters:
-        - $ref: "#/components/parameters/travel_id"
+        - name: travelId
+          in: query
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
-          description: la liste des étapes du voyage
+          description: La liste des étapes du voyage
           content:
             application/json:
               schema:
@@ -216,18 +123,171 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Step"
+  /travels:
+    put:
+      tags:
+        - travel
+      operationId: crupdateTravel
+      summary: Met à jour un voyage si l'id est donné, sinon on le crée
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: "#/components/schemas/Travel"
+      responses:
+        '200':
+          description: Le voyage créé ou mis à jour
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Travel"
+  /travel:
+    get:
+      tags:
+        - travel
+      operationId: getAllTravel
+      summary: Obtenir la liste paginée de tous les voyages
+      responses:
+        '200':
+          description: La liste paginée de tous les voyages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Travel"
+  /travel/search/findTravelById:
+    get:
+      tags:
+        - travel
+      operationId: getTravelById
+      summary: Obtenir un voyage demandé
+      parameters:
+        - name: travelId
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Le voyage demandé
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Travel"
+  /booking:
+    put:
+      tags:
+        - booking
+      operationId: crupdateBooking
+      summary: Met à jour une réservation si l'id est donné, sinon on le crée
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: "#/components/schemas/Booking"
+      responses:
+        '200':
+          description: La réservation créée ou mise à jour
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Booking"
+  /bookings/search/findBookingByClientId:
+    get:
+      tags:
+        - booking
+      operationId: getBookingByClientId
+      summary: Obtenir les réservations d'un client
+      parameters:
+        - name: clientId
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: La liste des réservations du client
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Booking"
+  /booking/total/{bookingId}:
+    get:
+      tags:
+        - booking
+      operationId: totalCost
+      summary: Obtenir le coût total de la réservation
+      parameters:
+        - name: bookingId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Le coût total de la réservation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: number
+  /booking/validation/{reservation_id}:
+    put:
+      tags:
+        - booking
+      operationId: validateBooking
+      summary: Valider une réservation
+      parameters:
+        - name: reservation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: La réservation mise à jour
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Booking"
 components:
   parameters:
     travel_id:
       name: travel_id
       required: true
-      in: path
+      in: query
       schema:
         type: integer
     client_id:
       name: client_id
       required: true
-      in: path
+      in: query
       schema:
         type: integer
     reservation_id:
@@ -243,6 +303,8 @@ components:
         id:
           type: integer
         name:
+          type: string
+        description:
           type: string
         departure:
           type: string
@@ -287,8 +349,27 @@ components:
           type: string
         travel_id:
           type: integer
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
     token:
       type: object
       properties:
         token:
           type: string
+    FileDB:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+        data:
+          type: string
+          format: byte
