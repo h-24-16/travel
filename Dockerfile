@@ -1,4 +1,4 @@
-FROM maven:3.9.8-sapmachine-17 AS build
+FROM maven:3.9.8-sapmachine-21 AS build
 
 WORKDIR /app
 
