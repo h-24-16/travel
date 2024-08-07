@@ -196,6 +196,24 @@ paths:
                 properties:
                   data:
                     $ref: "#/components/schemas/Step"
+  /steps/{travel_id}:
+    get:
+      tags:
+        - step
+      operationId: getStepsByTravelId
+      summary: obtenir une liste des étapes du voyage
+      responses:
+        '200':
+          description: la liste des étapes du voyage
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Step"
 components:
   parameters:
     travel_id:
