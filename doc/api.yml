@@ -61,7 +61,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Travel"
-  /reservation:
+  /booking:
     put:
       tags:
         - booking
@@ -85,7 +85,7 @@ paths:
                 properties:
                   data:
                     $ref: "#/components/schemas/Booking"
-  /reservation/{client_id}:
+  /booking/{client_id}:
     get:
       tags:
         - booking
@@ -105,7 +105,7 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Booking"
-  /reservation/validation/{reservation_id}:
+  /booking/validation/{reservation_id}:
     put:
       tags:
         - booking
