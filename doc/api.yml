@@ -261,7 +261,7 @@ paths:
       operationId: validateBooking
       summary: Valider une réservation
       parameters:
-        - name: reservation_id
+        - name: bookingId
           in: path
           required: true
           schema:
