@@ -3,6 +3,8 @@ package com.travel.api.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
 public class Travel {
@@ -15,6 +17,7 @@ public class Travel {
     private String departure;
     private String destination;
     private Integer duration;
+    private LocalDate departureDate;
     private Double price;
 
     @ManyToOne
