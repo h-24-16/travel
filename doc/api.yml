@@ -55,7 +55,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Client"
+              $ref: "#/components/schemas/CreateClient"
       responses:
         '200':
           description: Token
@@ -314,6 +314,14 @@ components:
           type: string
         photo:
           type: string
+    CreateClient:
+      type: object
+      properties:
+        password:
+          type: string
+      allOf:
+        - $ref: "#/components/schemas/Client"
+
     Step:
       type: object
       properties:

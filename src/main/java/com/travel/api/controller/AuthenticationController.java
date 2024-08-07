@@ -27,8 +27,9 @@ public class AuthenticationController {
     private JwtService jwtService;
 
     @PostMapping(path = "register")
-    public void register(@RequestBody Client client) {
+    public Map<String, String> register(@RequestBody Client client) {
         this.userService.createUser(client);
+        return jwtService.generate(client.getEmail());
     }
 
     @PostMapping(path = "login")
