@@ -78,7 +78,7 @@ public class SecurityConfiguration {
                                         .requestMatchers(DELETE, "/bookings/**").hasRole(Permission.ADMIN.name())
 
                                         .requestMatchers(GET, "/booking/**").permitAll()
-                                        .requestMatchers(PUT, "/booking/**").permitAll()
+                                        .requestMatchers(PUT, "/booking/**").authenticated()
                                         .requestMatchers(PUT, "/booking/validation/**").hasRole(Permission.ADMIN.name())
 
                                         .anyRequest().authenticated()
