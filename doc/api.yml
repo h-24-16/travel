@@ -37,20 +37,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                data:
-                  $ref: "#/components/schemas/Login"
+              $ref: "#/components/schemas/Login"
       responses:
         '200':
           description: Token
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: string
+                type: string
   /auth/register:
     post:
       tags:
@@ -61,20 +55,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                data:
-                  $ref: "#/components/schemas/Client"
+              $ref: "#/components/schemas/Client"
       responses:
         '200':
           description: Token
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: string
+                type: string
   /step:
     put:
       tags:
@@ -85,20 +73,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                data:
-                  $ref: "#/components/schemas/Step"
+              $ref: "#/components/schemas/Step"
       responses:
         '200':
           description: L'étape créée ou mise à jour
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    $ref: "#/components/schemas/Step"
+                $ref: "#/components/schemas/Step"
   /steps/search/findStepByTravelId:
     get:
       tags:
@@ -117,12 +99,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Step"
+                type: array
+                items:
+                  $ref: "#/components/schemas/Step"
   /travels:
     put:
       tags:
@@ -133,20 +112,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                data:
-                  $ref: "#/components/schemas/Travel"
+              $ref: "#/components/schemas/Travel"
       responses:
         '200':
           description: Le voyage créé ou mis à jour
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    $ref: "#/components/schemas/Travel"
+                $ref: "#/components/schemas/Travel"
   /travel:
     get:
       tags:
@@ -159,12 +132,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Travel"
+                type: array
+                items:
+                  $ref: "#/components/schemas/Travel"
   /travel/search/findTravelById:
     get:
       tags:
@@ -202,12 +172,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Travel"
+                type: array
+                items:
+                  $ref: "#/components/schemas/Travel"
   /booking:
     put:
       tags:
@@ -218,20 +185,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                data:
-                  $ref: "#/components/schemas/Booking"
+              $ref: "#/components/schemas/Booking"
       responses:
         '200':
           description: La réservation créée ou mise à jour
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    $ref: "#/components/schemas/Booking"
+                $ref: "#/components/schemas/Booking"
   /bookings/search/findBookingByClientId:
     get:
       tags:
@@ -250,12 +211,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Booking"
+                type: array
+                items:
+                  $ref: "#/components/schemas/Booking"
   /booking/total/{bookingId}:
     get:
       tags:
@@ -274,10 +232,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: number
+                type: number
   /booking/validation/{reservation_id}:
     put:
       tags:
@@ -296,10 +251,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    $ref: "#/components/schemas/Booking"
+                $ref: "#/components/schemas/Booking"
 components:
   parameters:
     travel_id:

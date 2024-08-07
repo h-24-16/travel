@@ -8,6 +8,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +18,13 @@ import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
 
-@AllArgsConstructor
 @Service
 public class JwtService {
 
-    private final String encryptionKey = "608f36e92dc66d97d5933f0e6371493cb4fc05b1aa8f8de64014732472303a7c";
+    @Value(value = "${encryption.key}")
+    private String encryptionKey;
+
+    @Autowired
     private CustomUserDetailsService userService;
 
     public Map<String, String> generate(String username) {
