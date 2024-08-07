@@ -1,5 +1,6 @@
 package com.travel.api.security;
 
+import com.travel.api.model.auth.Permission;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,9 +48,21 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                         authorize ->
                                 authorize
-                                        .requestMatchers(POST, "/auth").permitAll()
+                                        .requestMatchers(POST, "/auth/**").permitAll()
 
                                         .requestMatchers(POST, "/files").permitAll()
+
+                                        .requestMatchers(GET, "/client/**").permitAll()
+
+                                        .requestMatchers(GET, "/travel/**").permitAll()
+                                        .requestMatchers(POST, "/travel/**").hasRole(Permission.ADMIN.name())
+                                        .requestMatchers(PUT, "/travel/**").hasRole(Permission.ADMIN.name())
+                                        .requestMatchers(DELETE, "/travel/**").hasRole(Permission.ADMIN.name())
+
+                                        .requestMatchers(GET, "/travels/**").permitAll()
+                                        .requestMatchers(POST, "/travels/**").hasRole(Permission.ADMIN.name())
+                                        .requestMatchers(PUT, "/travels/**").hasRole(Permission.ADMIN.name())
+                                        .requestMatchers(DELETE, "/travels/**").hasRole(Permission.ADMIN.name())
 
                                         .anyRequest().authenticated()
                 )
