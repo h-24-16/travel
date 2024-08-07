@@ -184,6 +184,30 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Travel"
+  /travel/search/findTravelByName:
+    get:
+      tags:
+        - travel
+      operationId: getTravelByName
+      summary: Rechercher des voyages par nom
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: La liste des voyages correspondants
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Travel"
   /booking:
     put:
       tags:
