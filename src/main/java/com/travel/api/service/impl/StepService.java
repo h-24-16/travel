@@ -13,4 +13,8 @@ public class StepService {
     public Step crupdateStep(Step step) {
         return stepRepository.save(step);
     }
+
+    public Step getStepById(Long id) {
+        return stepRepository.findById(id).get();
+    }
 }

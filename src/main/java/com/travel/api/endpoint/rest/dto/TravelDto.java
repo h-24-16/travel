@@ -1,20 +1,14 @@
-package com.travel.api.model;
+package com.travel.api.endpoint.rest.dto;
 
-import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
 
-@Entity
 @Data
 @Builder(toBuilder = true)
-public class Travel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TravelDto {
     private Long id;
-
     private String name;
     private String departure;
     private String destination;
@@ -22,8 +16,5 @@ public class Travel {
     private Integer duration;
     private LocalDate departureDate;
     private Double price;
-
-    @ManyToOne
-    private FileDB photo;
-
+    private String photo;
 }
