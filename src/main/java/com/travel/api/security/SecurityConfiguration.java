@@ -62,6 +62,7 @@ public class SecurityConfiguration {
                                   )
                                   .permitAll()
                                         .requestMatchers(POST, "/auth/**").permitAll()
+                                        .requestMatchers(GET, "/ping").permitAll()
 
                                         .requestMatchers(GET, "/files/**").permitAll()
                                         .requestMatchers(POST, "/files").permitAll()

@@ -5,6 +5,20 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
+  /ping:
+    get:
+      tags:
+        - health
+      operationId: ping
+      summary: Check if the backend is up
+      responses:
+        '200':
+          description: pong
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: pong
   /files:
     post:
       tags:
